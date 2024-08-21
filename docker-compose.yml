@@ -1,0 +1,17 @@
+services:
+  web:
+    image: nginx:latest
+    container_name: web-notification-publisher-app
+    ports:
+      - 8080:80
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./app:/var/www
+  php:
+    build: ./
+    container_name: php-notification-publisher-app
+    volumes:
+      - ./app:/var/www
+    environment:
+      XDEBUG_CONFIG: client_host=172.17.0.1 client_port=9004
+      PHP_IDE_CONFIG: serverName=notification_publisher
