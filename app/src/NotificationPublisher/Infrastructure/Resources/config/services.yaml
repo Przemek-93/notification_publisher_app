@@ -1,0 +1,56 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    _instanceof:
+        App\Shared\CQRS\CommandHandlerInterface:
+            tags: { name: messenger.message_handler, bus: command.bus }
+
+        App\NotificationPublisher\Domain\Service\Notification\Channel\ChannelInterface:
+            tags: [ 'app.notification_channel' ]
+
+        App\NotificationPublisher\Domain\Sender\MailerInterface:
+            tags: [ 'app.mailer_sender' ]
+
+    App\NotificationPublisher\Domain\Service\Notification\Notifier:
+        arguments:
+            - !tagged_iterator 'app.notification_channel'
+
+    App\NotificationPublisher\Domain\Service\Notification\Channel\EmailChannel:
+        arguments:
+            - !tagged_iterator 'app.mailer_sender'
+
+    App\NotificationPublisher\Domain\Service\Notification\Channel\SMSChannel: ~
+
+    App\NotificationPublisher\UserInterface\Console\SendNotificationsCommand: ~
+
+    App\NotificationPublisher\Application\CQRS\Command\SendNotificationHandler: ~
+
+    App\NotificationPublisher\Infrastructure\Sender\Email\MailTrap:
+        tags:
+          - { name: 'app.mailer_sender', priority: 20 }
+        arguments:
+            $apiKey: '%env(MAIL_TRAP_API_KEY)%'
+
+    App\NotificationPublisher\Infrastructure\Sender\Email\MailerSend:
+        tags:
+            - { name: 'app.mailer_sender', priority: 10 }
+        arguments:
+            $apiKey: '%env(MAILER_SEND_API_KEY)%'
+
+    App\NotificationPublisher\Infrastructure\Sender\SMS\SMS:
+        arguments:
+            $sid: '%env(SMS_TWILIO_SID)%'
+            $authToken: '%env(SMS_TWILIO_AUTH_TOKEN)%'
+            $fromNumber: '%env(SMS_TWILIO_FROM_NUMBER)%'
+
+    App\NotificationPublisher\Domain\Sender\SMSInterface: '@App\NotificationPublisher\Infrastructure\Sender\SMS\SMS'
+
+    App\NotificationPublisher\Domain\Factory\NotificationDTOFactory: ~
+
+when@test:
+    services:
+        _defaults:
+            autowire: true
+            autoconfigure: true

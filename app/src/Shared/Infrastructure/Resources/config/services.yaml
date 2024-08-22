@@ -1,0 +1,13 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\Shared\CQRS\CommandBusInterface: '@App\Shared\Infrastructure\Symfony\CQRS\CommandBus'
+
+    App\Shared\Infrastructure\Symfony\CQRS\CommandBus:
+        arguments: [ '@command.bus' ]
+
+    App\Shared\Serializer\SerializerInterface: '@App\Shared\Infrastructure\Symfony\Serializer\Serializer'
+
+    App\Shared\Infrastructure\Symfony\Serializer\Serializer: ~
