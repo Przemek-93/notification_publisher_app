@@ -25,3 +25,5 @@ This project is designed to showcase a notification publisher application implem
 - `make bash` - cli for php container, shortcut for `docker compose exec php bash`
 - `make xon` - enable xdebug
 - `make xoff` - disable xdebug
+- `make fix` - automatically fixing code style by PHP Code Sniffer   
+- `make analyse` - start static analyse
