@@ -7,7 +7,6 @@ namespace App\NotificationPublisher\Domain\Service\Notification;
 use App\NotificationPublisher\Domain\DTO\NotificationDTO;
 use App\NotificationPublisher\Domain\Exception\WrongNotificationChannelException;
 use App\NotificationPublisher\Domain\Service\Notification\Channel\ChannelInterface;
-use DomainException;
 
 final readonly class Notifier
 {

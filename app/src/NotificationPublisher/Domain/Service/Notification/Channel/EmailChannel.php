@@ -23,7 +23,7 @@ final readonly class EmailChannel implements ChannelInterface
 
     public function support(NotificationChannel $notificationChannel): bool
     {
-        return $notificationChannel === NotificationChannel::EMAIL;
+        return NotificationChannel::EMAIL === $notificationChannel;
     }
 
     public function send(PayloadInterface $payload): void

@@ -13,6 +13,6 @@ class WrongNotificationChannelException extends Exception
     public function __construct(
         public string $channel,
     ) {
-        parent::__construct(sprintf(self::MESSAGE,$channel));
+        parent::__construct(sprintf(self::MESSAGE, $channel));
     }
 }

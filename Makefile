@@ -1,3 +1,4 @@
+DE=docker exec -it -u www-data php-notification-publisher-app
 SERVICE_ID=$(shell docker compose ps -q php)
 
 build:
@@ -22,3 +23,10 @@ xon:
 xoff:
 	@docker exec -i $(SERVICE_ID) bash -c '[ -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini ] && cd /usr/local/etc/php/ && mkdir -p disabled/ && mv conf.d/docker-php-ext-xdebug.ini disabled/ && \
 		echo "Xdebug disabled successfully" || echo "Xdebug already disabled"'
+
+fix:
+	docker compose exec php ./vendor/bin/php-cs-fixer fix --allow-risky=yes
+
+analyse:
+	docker compose exec php ./vendor/bin/php-cs-fixer fix --allow-risky=yes --dry-run --verbose
+	docker compose exec php ./vendor/bin/psalm --no-cache

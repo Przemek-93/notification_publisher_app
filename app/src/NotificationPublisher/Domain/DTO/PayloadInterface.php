@@ -6,5 +6,4 @@ namespace App\NotificationPublisher\Domain\DTO;
 
 interface PayloadInterface
 {
-
 }

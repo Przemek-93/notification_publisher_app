@@ -18,7 +18,7 @@ final readonly class NotificationDTOFactory
     ) {
     }
 
-    /** @param array<string> $payload */
+    /** @param array<array-key, mixed> $payload */
     public function create(string $channel, array $payload): NotificationDTO
     {
         $notificationChannel = NotificationChannel::tryFrom($channel = strtolower($channel));

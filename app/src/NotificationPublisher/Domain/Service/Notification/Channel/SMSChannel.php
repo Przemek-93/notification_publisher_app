@@ -19,7 +19,7 @@ final readonly class SMSChannel implements ChannelInterface
 
     public function support(NotificationChannel $notificationChannel): bool
     {
-        return $notificationChannel === NotificationChannel::SMS;
+        return NotificationChannel::SMS === $notificationChannel;
     }
 
     public function send(PayloadInterface $payload): void

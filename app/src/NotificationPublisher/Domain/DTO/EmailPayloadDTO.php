@@ -6,7 +6,7 @@ namespace App\NotificationPublisher\Domain\DTO;
 
 final readonly class EmailPayloadDTO implements PayloadInterface
 {
-    /** @param array<EmailRecipientDTO> $recipients */
+    /** @param array<array-key, mixed> $recipients */
     public function __construct(
         public string $fromEmail,
         public string $fromName,

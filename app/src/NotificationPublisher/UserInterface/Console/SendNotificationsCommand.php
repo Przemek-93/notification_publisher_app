@@ -36,10 +36,10 @@ final class SendNotificationsCommand extends Command
                 'recipients' => [['email' => 'emcekwadrat47@gmail.com', 'name' => 'Przemek']],
             ];
 
-            $smsPayload = [
-                'recipientNumber' => '+48511094325',
-                'messageBody' => 'Hi, your phone is under hacker attack!#@! wa$1l0$',
-            ];
+            //            $smsPayload = [
+            //                'recipientNumber' => '+48511094325',
+            //                'messageBody' => 'Hi, your phone is under hacker attack!#@! wa$1l0$',
+            //            ];
 
             $output->writeln('Send notification: start');
 
@@ -48,6 +48,7 @@ final class SendNotificationsCommand extends Command
             return Command::SUCCESS;
         } catch (Throwable $throwable) {
             $output->writeln(sprintf('Send notification error: "%s"', $throwable->getMessage()));
+
             return Command::FAILURE;
         }
     }

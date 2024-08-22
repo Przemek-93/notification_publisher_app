@@ -22,7 +22,7 @@ final readonly class MailerSend implements MailerInterface
         $mailerSend = new MailerSendClient(['api_key' => $this->apiKey]);
 
         $recipients = array_map(
-            static fn (string $recipient) => new Recipient($recipient, 'Recipient'),
+            static fn (array $recipient) => new Recipient($recipient['email'], $recipient['name']),
             $emailPayloadDTO->recipients,
         );
 

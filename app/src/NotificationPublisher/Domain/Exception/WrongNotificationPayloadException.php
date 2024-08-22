@@ -13,6 +13,6 @@ class WrongNotificationPayloadException extends Exception
     public function __construct(
         public string $payloadClass,
     ) {
-        parent::__construct(sprintf(self::MESSAGE,$payloadClass));
+        parent::__construct(sprintf(self::MESSAGE, $payloadClass));
     }
 }

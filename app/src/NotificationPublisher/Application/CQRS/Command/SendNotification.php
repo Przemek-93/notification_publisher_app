@@ -8,7 +8,7 @@ use App\Shared\CQRS\CommandInterface;
 
 final readonly class SendNotification implements CommandInterface
 {
-    /** @param array<string> $payload */
+    /** @param array<string, mixed> $payload */
     public function __construct(
         public string $channel,
         public array $payload

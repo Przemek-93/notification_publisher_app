@@ -11,5 +11,4 @@ final readonly class SMSPayloadDTO implements PayloadInterface
         public string $messageBody,
     ) {
     }
-
 }
