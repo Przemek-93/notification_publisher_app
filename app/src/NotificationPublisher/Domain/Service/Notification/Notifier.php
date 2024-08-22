@@ -13,19 +13,22 @@ final readonly class Notifier
     public function __construct(
         /** @var iterable<ChannelInterface> */
         private iterable $notificationChannels,
+        private array $channelsConfig,
     ) {
     }
 
     public function publish(NotificationDTO $notificationDTO): void
     {
+        $channelEnum = $notificationDTO->notificationChannel;
+
         foreach ($this->notificationChannels as $channel) {
-            if (true === $channel->support($notificationDTO->notificationChannel)) {
+            if (true === $this->channelsConfig[$channelEnum->value] && true === $channel->support($channelEnum)) {
                 $channel->send($notificationDTO->payload);
 
                 return;
             }
         }
 
-        throw new WrongNotificationChannelException($notificationDTO->notificationChannel->value);
+        throw new WrongNotificationChannelException($channelEnum->value);
     }
 }
