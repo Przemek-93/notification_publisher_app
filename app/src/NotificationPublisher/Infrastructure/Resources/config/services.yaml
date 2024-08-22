@@ -1,3 +1,8 @@
+parameters:
+    notification.channels_config:
+        email: false
+        sms: false
+
 services:
     _defaults:
         autowire: true
@@ -16,6 +21,7 @@ services:
     App\NotificationPublisher\Domain\Service\Notification\Notifier:
         arguments:
             - !tagged_iterator 'app.notification_channel'
+            - '%notification.channels_config%'
 
     App\NotificationPublisher\Domain\Service\Notification\Channel\EmailChannel:
         arguments:
