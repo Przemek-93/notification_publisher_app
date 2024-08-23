@@ -1,0 +1,2 @@
+imports:
+    - { resource: '../../src/NotificationPublisher/Infrastructure/Resources/config/rate_limiter.yaml'}

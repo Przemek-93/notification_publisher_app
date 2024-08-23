@@ -1,0 +1,7 @@
+framework:
+  rate_limiter:
+    message_send:
+      policy: 'fixed_window'
+      limit: '%env(int:NOTIFICATION_SEND_LIMIT)%'
+      interval: '1 hour'
+      cache_pool: 'cache.app'
