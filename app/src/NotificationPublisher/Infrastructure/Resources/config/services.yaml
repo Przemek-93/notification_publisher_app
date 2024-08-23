@@ -1,6 +1,6 @@
 parameters:
     notification.channels_config:
-        email: false
+        email: true
         sms: false
 
 services:
