@@ -22,6 +22,7 @@ services:
         arguments:
             - !tagged_iterator 'app.notification_channel'
             - '%notification.channels_config%'
+            - '%env(int:NOTIFICATION_SEND_LIMIT)%'
 
     App\NotificationPublisher\Domain\Service\Notification\Channel\EmailChannel:
         arguments:
@@ -54,6 +55,10 @@ services:
     App\NotificationPublisher\Domain\Sender\SMSInterface: '@App\NotificationPublisher\Infrastructure\Sender\SMS\SMS'
 
     App\NotificationPublisher\Domain\Factory\NotificationDTOFactory: ~
+
+    App\NotificationPublisher\Infrastructure\Limiter\MessageSendLimiter: ~
+
+    App\NotificationPublisher\Domain\Limiter\MessageSendLimiterInterface: '@App\NotificationPublisher\Infrastructure\Limiter\MessageSendLimiter'
 
 when@test:
     services:

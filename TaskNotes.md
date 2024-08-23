@@ -12,7 +12,7 @@
 - [ ] Send the same notification via several different channels.
 
 ### 4. (Bonus) Throttling:
-- [ ] Some messages are expected to trigger a user response. In such a case the service should allow a limited amount of notifications sent to users within an hour. e.g. send up to 300 an hour.
+- [x] Some messages are expected to trigger a user response. In such a case the service should allow a limited amount of notifications sent to users within an hour. e.g. send up to 300 an hour.
 
 ### 5. (Bonus) Usage tracking:
 - [ ] Track which messages were sent, when, and to whom, using a user identifier parameter.
