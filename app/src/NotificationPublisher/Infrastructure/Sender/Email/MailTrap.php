@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\NotificationPublisher\Infrastructure\Sender\Email;
 
-use App\NotificationPublisher\Domain\DTO\EmailPayloadDTO;
 use App\NotificationPublisher\Domain\Sender\MailerInterface;
 use Mailtrap\MailtrapClient;
 use Mailtrap\Mime\MailtrapEmail;
@@ -15,23 +14,25 @@ final readonly class MailTrap implements MailerInterface
 {
     public function __construct(
         private string $apiKey,
+        private string $fromEmail,
+        private string $fromName,
     ) {
     }
 
-    public function send(EmailPayloadDTO $emailPayloadDTO): void
-    {
-        $recipients = array_map(
-            static fn (array $recipient) => new Address($recipient['email'], $recipient['name']),
-            $emailPayloadDTO->recipients,
-        );
-
+    public function send(
+        string $toEmail,
+        string $toName,
+        string $subject,
+        string $text,
+        string $html,
+    ): void {
         $email = (new MailtrapEmail())
-            ->from(new Address($emailPayloadDTO->fromEmail, $emailPayloadDTO->fromName))
-            ->to(...$recipients)
+            ->from(new Address($this->fromEmail, $this->fromName))
+            ->to(new Address($toEmail, $toName))
             ->priority(Email::PRIORITY_HIGH)
-            ->subject($emailPayloadDTO->subject)
-            ->text($emailPayloadDTO->text)
-            ->html($emailPayloadDTO->html);
+            ->subject($subject)
+            ->text($text)
+            ->html($html);
 
         MailtrapClient::initSendingEmails($this->apiKey)->send($email);
     }

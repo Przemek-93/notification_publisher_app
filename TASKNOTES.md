@@ -9,7 +9,7 @@
 
 ### 3. Configuration-driven:
 - [x] Enable/disable different communication channels via configuration.
-- [ ] Send the same notification via several different channels.
+- [x] Send the same notification via several different channels.
 
 ### 4. (Bonus) Throttling:
 - [x] Some messages are expected to trigger a user response. In such a case the service should allow a limited amount of notifications sent to users within an hour. e.g. send up to 300 an hour.

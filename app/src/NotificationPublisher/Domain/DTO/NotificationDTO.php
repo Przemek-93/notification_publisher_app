@@ -9,8 +9,9 @@ use App\NotificationPublisher\Domain\Enum\NotificationChannel;
 final readonly class NotificationDTO
 {
     public function __construct(
-        public PayloadInterface $payload,
+        public PayloadDTO $payload,
         public NotificationChannel $notificationChannel = NotificationChannel::EMAIL,
+        public bool $sendViaAllChannels = false,
     ) {
     }
 }
