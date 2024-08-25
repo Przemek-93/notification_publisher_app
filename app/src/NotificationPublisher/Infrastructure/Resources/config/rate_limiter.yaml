@@ -3,5 +3,5 @@ framework:
     message_send:
       policy: 'fixed_window'
       limit: '%env(int:NOTIFICATION_SEND_LIMIT)%'
-      interval: '1 hour'
+      interval: '%env(NOTIFICATION_SEND_LIMIT_INTERVAL)%'
       cache_pool: 'cache.app'

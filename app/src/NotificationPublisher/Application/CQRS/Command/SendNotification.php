@@ -11,7 +11,8 @@ final readonly class SendNotification implements CommandInterface
     /** @param array<string, mixed> $payload */
     public function __construct(
         public string $channel,
-        public array $payload
+        public array $payload,
+        public bool $sendViaAllChannels = false,
     ) {
     }
 }

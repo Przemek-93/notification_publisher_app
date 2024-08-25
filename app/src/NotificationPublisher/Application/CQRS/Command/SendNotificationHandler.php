@@ -22,6 +22,7 @@ final readonly class SendNotificationHandler implements CommandHandlerInterface
             $this->factory->create(
                 $command->channel,
                 $command->payload,
+                $command->sendViaAllChannels,
             )
         );
     }
