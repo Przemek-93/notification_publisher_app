@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\NotificationPublisher\Infrastructure\Sender\SMS;
 
-use App\NotificationPublisher\Domain\DTO\SMSPayloadDTO;
 use App\NotificationPublisher\Domain\Sender\SMSInterface;
 use Twilio\Rest\Client;
 
@@ -17,15 +16,17 @@ final readonly class SMS implements SMSInterface
     ) {
     }
 
-    public function send(SMSPayloadDTO $SMSPayloadDTO): void
-    {
+    public function send(
+        string $messageBody,
+        string $toNumber,
+    ): void {
         $twilio = new Client($this->sid, $this->authToken);
 
         $twilio->messages->create(
-            $SMSPayloadDTO->recipientNumber,
+            $toNumber,
             [
                 'from' => $this->fromNumber,
-                'body' => $SMSPayloadDTO->messageBody,
+                'body' => $messageBody,
             ]
         );
     }

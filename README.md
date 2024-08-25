@@ -11,10 +11,11 @@ This project is designed to showcase a notification publisher application implem
 1. Clone repository from `git@github.com:Przemek-93/symfony_skeleton.git`
 2. Install Makefile - https://makefiletutorial.com/
 3. Install Docker - https://docs.docker.com/
-4. In the console get into the main project directory and type `make`
+4. In the console get into the main project directory and type `make` or `make build`
 5. Wait until the installation process is done
-6. Run `make composer` to install composer dependencies
-7. After the first installation use `make up` and `make stop` to turn on and turn off the project
+6. Run `make up` to start container
+7. Run `make composer` to install composer dependencies
+8. After the first installation use `make up` and `make stop` to turn on and turn off the project
 
 ## Useful commands
 
@@ -27,3 +28,4 @@ This project is designed to showcase a notification publisher application implem
 - `make xoff` - disable xdebug
 - `make fix` - automatically fixing code style by PHP Code Sniffer   
 - `make analyse` - start static analyse
+- `make send-notification` - run send notification test command

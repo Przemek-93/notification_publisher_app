@@ -1,7 +1,7 @@
 parameters:
     notification.channels_config:
-        email: true
-        sms: false
+        email: '%env(bool:MAIL_CHANNEL_ENABLED)%'
+        sms: '%env(bool:SMS_CHANNEL_ENABLED)%'
 
 services:
     _defaults:
@@ -39,12 +39,16 @@ services:
           - { name: 'app.mailer_sender', priority: 20 }
         arguments:
             $apiKey: '%env(MAIL_TRAP_API_KEY)%'
+            $fromEmail: '%env(MAIL_FROM_EMAIL)%'
+            $fromName: '%env(MAIL_FROM_NAME)%'
 
     App\NotificationPublisher\Infrastructure\Sender\Email\MailerSend:
         tags:
             - { name: 'app.mailer_sender', priority: 10 }
         arguments:
             $apiKey: '%env(MAILER_SEND_API_KEY)%'
+            $fromEmail: '%env(MAIL_FROM_EMAIL)%'
+            $fromName: '%env(MAIL_FROM_NAME)%'
 
     App\NotificationPublisher\Infrastructure\Sender\SMS\SMS:
         arguments:

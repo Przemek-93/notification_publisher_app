@@ -8,7 +8,7 @@ use Exception;
 
 class WrongNotificationChannelException extends Exception
 {
-    public const string MESSAGE = 'Notification channel "%s" not exists!';
+    public const string MESSAGE = 'Notification channel "%s" not exists or is disabled. Please check in env if is enabled.';
 
     public function __construct(
         public string $channel,

@@ -30,3 +30,6 @@ fix:
 analyse:
 	docker compose exec php ./vendor/bin/php-cs-fixer fix --allow-risky=yes --dry-run --verbose
 	docker compose exec php ./vendor/bin/psalm --no-cache
+
+send-notification:
+	docker compose exec php bin/console notification:send
