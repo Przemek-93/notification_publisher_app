@@ -8,11 +8,10 @@ use Exception;
 
 class WrongNotificationChannelException extends Exception
 {
-    public const string MESSAGE = 'Notification channel "%s" not exists or is disabled. Please check in env if is enabled.';
+    public const string MESSAGE = 'Notification channel not exists or is disabled. Please check in env if is enabled.';
 
-    public function __construct(
-        public string $channel,
-    ) {
-        parent::__construct(sprintf(self::MESSAGE, $channel));
+    public function __construct()
+    {
+        parent::__construct(self::MESSAGE);
     }
 }

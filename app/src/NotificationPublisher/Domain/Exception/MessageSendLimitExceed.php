@@ -11,8 +11,8 @@ class MessageSendLimitExceed extends Exception
     public const string MESSAGE = 'Message send limit %d exceed! Retry after: %d minutes';
 
     public function __construct(
-        public int $limit,
-        public float $retryAfter,
+        int $limit,
+        float $retryAfter,
     ) {
         parent::__construct(sprintf(self::MESSAGE, $limit, $retryAfter));
     }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\NotificationPublisher\UserInterface\Console;
 
 use App\NotificationPublisher\Application\CQRS\Command\SendNotification;
+use App\NotificationPublisher\Domain\Enum\NotificationChannel;
 use App\Shared\CQRS\CommandBusInterface;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -15,7 +16,7 @@ use Throwable;
 
 #[AsCommand(
     name: 'notification:send',
-    description: 'Send notifications to users',
+    description: 'Test command for send notifications to users',
 )]
 final class SendNotificationsCommand extends Command
 {
@@ -29,28 +30,30 @@ final class SendNotificationsCommand extends Command
     {
         try {
             $payload = [
-                'sms' => [
-                    'messageBody' => 'Test SMS message body',
-                ],
-                'email' => [
-                    'subject' => 'Test email subject',
-                    'text' => 'Test email text',
-                    'html' => 'Test email html',
-                ],
-                'recipients' => [
-                    [
-                        'id' => Uuid::uuid4()->toString(),
-                        'firstName' => 'John',
-                        'lastName' => 'Doe',
-                        'phone' => '+48511094325',
-                        'email' => 'john.doe@example.com',
-                    ],
+                'subject' => 'Test email subject',
+                'content' => 'Test email text',
+                'html' => 'Test email html',
+            ];
+
+            $recipients = [
+                [
+                    'id' => Uuid::uuid4()->toString(),
+                    'firstName' => 'John',
+                    'lastName' => 'Doe',
+                    'phone' => '+48111111111',
+                    'email' => 'john.doe@example.com',
                 ],
             ];
 
             $output->writeln('Send notification: start');
 
-            $this->commandBus->dispatch(new SendNotification('sms', $payload, false));
+            $this->commandBus->dispatch(
+                new SendNotification(
+                    [NotificationChannel::SMS->value],
+                    $payload,
+                    $recipients,
+                ),
+            );
 
             return Command::SUCCESS;
         } catch (Throwable $throwable) {

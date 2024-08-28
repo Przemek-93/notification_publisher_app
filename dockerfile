@@ -1,8 +1,8 @@
 FROM php:8.3-fpm-alpine AS base
 
-RUN apk add autoconf build-base libzip-dev zip linux-headers bash \
+RUN apk add --no-cache autoconf build-base libzip-dev libxslt-dev zip linux-headers bash \
     && docker-php-ext-configure opcache --enable-opcache \
-    && docker-php-ext-install zip opcache
+    && docker-php-ext-install zip opcache xsl
 
 WORKDIR /var/www
 COPY ./app /var/www
